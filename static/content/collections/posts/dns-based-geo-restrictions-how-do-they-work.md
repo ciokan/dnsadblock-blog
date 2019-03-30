@@ -6,7 +6,7 @@ tags:
   - dns geo
   - dns geo restriction
 authors: Romeo Mihalcea
-categories: News
+categories: Dns
 meta:
   description: Learn how a DNS-based geo restriction works
   keywords: 'geo restriction, dns geo, dns geo restriction'
