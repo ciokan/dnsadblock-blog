@@ -10,7 +10,7 @@ categories: Dns
 meta:
   description: >-
     Tracking companies are using CNAME masking techniques to bypass
-    browser-based ad blocks and track you
+    browser-based ad blockers and track you
   keywords: 'cname cloaking, tracking, advertising, third-party cookie'
 isPage: false
 showAuthor: true
@@ -29,32 +29,32 @@ excerpt: >-
 ---
 Advertisers and tracking entities are rolling out new ways of bypassing traditional ad blockers by using a disguising technique which conceals third-party content making it look as first-party content. This is important because most of the ad blockers we use today operate based on first-party input. For example, if your browser makes a request towards **dnsadblock.com**, an ad-blocking addon will apply its rules against that target.
 
-The principle is simple so far. You gather millions of such rules and iterate over them to see if any will match against our target. If the match returns negative, the extension does not block the request. This worked wonders for years but the game is changing. Advertisers and tracking entities are masking their address behind CNAME entries now and this makes it harder if not impossible for browser-based filters to block since they do not have access to the DNS records.
+The principle is simple so far. You gather millions of such rules and iterate over them to see if any will match against our target. If the match returns negative, the extension does not block the request. This worked wonders for years but the game is changing. Advertisers and tracking entities are now masking their address behind CNAME entries and this makes it harder if not impossible for browser-based filters to block requests since they do not have access to the DNS request chain.
 
 A CNAME (Canonical Name Record or Alias Record), in simple terms, is a way of pointing a domain name to another one - as an alias. I can have one domain pointing to another one, just like a normal redirect but at the DNS level. Let's take Netlify as an example. Whenever you deploy a new application to their control panel, you receive a unique address in the form of: `festive-nobel-876c06.netlify.com` (this is actually the address for our blog). It's ugly but it works for them. This is the main address of the app and you can't change it but you can add aliases and point your own domain towards this one using a CNAME:
 
 
 
-{"widget":"qards-code","config":"eyJjb2RlIjoiJDogZGlnIGJsb2cuZG5zYWRibG9jay5jb207OyBBTlNXRVIgU0VDVElPTjpcbmJsb2cuZG5zYWRibG9jay5jb20uXHQxMDNcdElOXHRDTkFNRVx0ZmVzdGl2ZS1ub2JlbC04NzZjMDYubmV0bGlmeS5jb20uXG5mZXN0aXZlLW5vYmVsLTg3NmMwNi5uZXRsaWZ5LmNvbS4gMjAgSU5cdEFcdDE1Ny4yMzAuMTIwLjYzIiwibGFuZ3VhZ2UiOiJiYXNoIn0="}
+{"widget":"qards-code","config":"eyJjb2RlIjoiJDogZGlnIGJsb2cuZG5zYWRibG9jay5jb21cblxuOzsgQU5TV0VSIFNFQ1RJT046XG5ibG9nLmRuc2FkYmxvY2suY29tLlx0MTAzXHRJTlx0Q05BTUVcdGZlc3RpdmUtbm9iZWwtODc2YzA2Lm5ldGxpZnkuY29tLlxuZmVzdGl2ZS1ub2JlbC04NzZjMDYubmV0bGlmeS5jb20uIDIwIElOXHRBXHQxNTcuMjMwLjEyMC42MyIsImxhbmd1YWdlIjoiYmFzaCJ9"}
 
 
 
-{"widget":"qards-code","config":"eyJjb2RlIjoiJCBkaWcgZmVzdGl2ZS1ub2JlbC04NzZjMDYubmV0bGlmeS5jb207OyBBTlNXRVIgU0VDVElPTjpcbmZlc3RpdmUtbm9iZWwtODc2YzA2Lm5ldGxpZnkuY29tLiAyMCBJTlx0QVx0NjguMTgzLjIxNS45MSIsImxhbmd1YWdlIjoiYmFzaCJ9"}
+{"widget":"qards-code","config":"eyJjb2RlIjoiJCBkaWcgZmVzdGl2ZS1ub2JlbC04NzZjMDYubmV0bGlmeS5jb21cblxuOzsgQU5TV0VSIFNFQ1RJT046XG5mZXN0aXZlLW5vYmVsLTg3NmMwNi5uZXRsaWZ5LmNvbS4gMjAgSU5cdEFcdDY4LjE4My4yMTUuOTEiLCJsYW5ndWFnZSI6ImJhc2gifQ=="}
 
 
-So one domain points to an `A` record which hosts a service but other domains can point to the same resource using a CNAME towards the first domain.
+So one domain points to an `A` record which hosts a service but other domains can point to the same resource using a CNAME towards the first domain...you get the idea.
 
-Back to out adblocking story. Let's say our extension is blocking a tracking domain such as `device-metrics-us-2.amazon.com`. Whoever uses that domain to track users will fail because it won't work with requests being filtered by our extension. What happends if I create a CNAME from `device-metrics-us-2.bogus.com` towards `device-metrics-us-2.amazon.com` and start using `device-metrics-us-2.bogus.com` in my app in order to track users? Those requests will slip through and it's business as usual with a simple CNAME. We can start injecting first-party javascript into our pages without any worries of them being filtered:
+Back to our adblocking story. Let's say our extension is blocking a tracking domain such as `device-metrics-us-2.amazon.com`. Whoever uses that domain to track users will fail because it won't work with requests being filtered by our extension. What happends if I create a CNAME from `device-metrics-us-2.bogus.com` towards `device-metrics-us-2.amazon.com` and start using `device-metrics-us-2.bogus.com` in my app in order to track users? Those requests will slip through and it's business as usual with a simple CNAME. We can start injecting first-party javascript into our pages without any worries of them being filtered:
 
 
 {"widget":"qards-code","config":"eyJsYW5ndWFnZSI6Imh0bWwiLCJjb2RlIjoiPHNjcmlwdCBzcmM9XCJodHRwczovL2RldmljZS1tZXRyaWNzLXVzLTIuYm9ndXMuY29tL3RyYWNrLmpzXCI+PC9zY3JpcHQ+In0="}
 
 
-In all honesty, I'm surprised it took them so many years to come up with this method. It's only now that this subject enters mainstream. CNAME's were here many years ago when adblocking started being a thing.
+In all honesty, I'm surprised it took them so many years to come up with this method. It's only now that this subject enters mainstream. CNAME's were here many years ago when adblocking wasn't even a thing.
 
-So…what can we do about this? Do we ditch our ad blockers because they're not good any more? No, we combine multiple services to combat these advertisers. One of the strengths of a DNS-based content filter such as DnsAdBlock is that it can catch these `CNAME` masking techniques and filter them out. At DnsAdBlock we run our filters against the initial request gut also against the response we receive from our DNS upstreams so `device-metrics-us-2.bogus.com` might slip through for us as well but the DNS response will show a CNAME towards `device-metrics-us-2.amazon.com` and we will catch that one and deny the request.
+So…what can we do about this? Do we ditch our ad blockers because they're not good any more? No, we combine multiple services to combat these advertisers. One of the strengths of a DNS-based content filter such as [DnsAdBlock](https://dnsadblock.com) is that it can catch these `CNAME` masking techniques and filter them out. At DnsAdBlock we run our filters against the initial request but also against the response we receive from our DNS upstreams so `device-metrics-us-2.bogus.com` might slip through for us as well but the DNS response will show a CNAME towards `device-metrics-us-2.amazon.com` and we will catch that one and deny the request.
 
-In case you're curious about the amount of tracking being performed on the internet I invite you to see the attached screenshot of blocked requests in just 24 hours of activity for a simple computer (mine). I didn't even used it the whole time since I regularly have to change my DNS servers because I'm testing and developing new features for DnsAdBlock.
+In case you're curious about the amount of tracking being performed on the internet I invite you to see the attached screenshot of blocked requests in just 24 hours of activity for a simple computer (mine). I didn't even used it the whole time since I regularly have to change my DNS servers because I'm testing and developing new features for DnsAdBlock. You can even see the gaps in the chart for the periods I was using an alternate DNS server.
 
 
 {"widget":"image","config":"eyJsaWdodGJveCI6dHJ1ZSwic3JjIjoiL2ltYWdlcy91cGxvYWRzL3NjcmVlbnNob3QtZG5zYWRibG9jay5jb20tMjAyMC4wMy4wMi0xOV8xOF80Ny5wbmciLCJhbHQiOiJCbG9ja2VkIEROUyByZXF1ZXN0cyBieSBEbnNBZEJsb2NrIiwiY2FwdGlvbiI6IjI0aCBzY3JlZW5zaG90IG9mIGJsb2NrZWQgRE5TIHJlcXVlc3RzIGJ5IERuc0FkQmxvY2siLCJsYXlvdXQiOiJmdWxsLXdpZHRoIn0="}
@@ -67,4 +67,4 @@ This is a combined effort that completes the circle. Browser based ad blockers d
 * they are about to be [limited by Chrome](https://www.wired.com/story/google-chrome-ad-blockers-extensions-api/) and other browser vendors
 * some offer questionable results by allowing "acceptable ads"
 
-The only solution that works is to combine DNS based filtering with browser based filtering so I'm inviting you to give us a try with a 6-month coupon (for the **Home** plan) for being so patient in reading our blog (valid during our BETA): **BETALISTERS**
+The only solution that works is to combine DNS based filtering with browser based filtering so I'm inviting you to give us a try with a 6-month coupon (for the [**Home** plan](https://dnsadblock.com/pricing)) for being so patient in reading our blog (valid during our BETA): **BETALISTERS**
