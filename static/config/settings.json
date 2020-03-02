@@ -1,5 +1,5 @@
 {
-  "name": "Blog",
+  "name": "DnsAdBlock Blog",
   "title": "DnsAdBlock Blog",
   "excerpt": "Blog for DnsAdBlock, the premium DNS servers on steroids",
   "baseUrl": "https://blog.dnsadblock.com",
@@ -12,5 +12,5 @@
     "npmPackage": "typeface-roboto"
   },
   "logo": "/images/uploads/logo.png",
-  "socialShareImg": "/images/uploads/save-bandwidth.png"
+  "socialShareImg": "/images/uploads/block-ads-tracking-adult-and-other-unwanted-content.png"
 }
