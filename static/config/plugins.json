@@ -1,32 +1,29 @@
 {
   "tracking": {
-    "enable": false,
+    "enable": true,
     "analytics": {
-      "trackingId": ""
+      "trackingId": "UA-36099094-16"
     }
   },
   "emailSubscribers": {
     "enable": false,
     "mailchimp": {
-      "endpoint": ""
-    }
-  },
-  "search": {
-    "enable": false,
-    "algolia": {
-      "appId": "",
-      "indexName": "",
-      "searchKey": ""
+      "endpoint": "-"
     }
   },
   "disqus": {
     "enable": false,
-    "shortname": ""
+    "shortname": "-"
+  },
+  "search": {
+    "enable": false,
+    "algolia": {
+      "appId": "-",
+      "indexName": "-",
+      "searchKey": "-"
+    }
   },
   "rssFeed": {
-    "enable": true
-  },
-  "sitemap": {
     "enable": true
   }
 }
