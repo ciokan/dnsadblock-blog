@@ -33,28 +33,22 @@ The principle is simple so far. You gather millions of such rules and iterate ov
 
 A CNAME (Canonical Name Record or Alias Record), in simple terms, is a way of pointing a domain name to another one - as an alias. I can have one domain pointing to another one, just like a normal redirect but at the DNS level. Let's take Netlify as an example. Whenever you deploy a new application to their control panel, you receive a unique address in the form of: `festive-nobel-876c06.netlify.com` (this is actually the address for our blog). It's ugly but it works for them. This is the main address of the app and you can't change it but you can add aliases and point your own domain towards this one using a CNAME:
 
-```
-$: dig blog.dnsadblock.com
 
-;; ANSWER SECTION:
-blog.dnsadblock.com.	103	IN	CNAME	festive-nobel-876c06.netlify.com.
-festive-nobel-876c06.netlify.com. 20 IN	A	157.230.120.63
-```
 
-```
-$ dig festive-nobel-876c06.netlify.com
+{"widget":"qards-code","config":"eyJjb2RlIjoiJDogZGlnIGJsb2cuZG5zYWRibG9jay5jb207OyBBTlNXRVIgU0VDVElPTjpcbmJsb2cuZG5zYWRibG9jay5jb20uXHQxMDNcdElOXHRDTkFNRVx0ZmVzdGl2ZS1ub2JlbC04NzZjMDYubmV0bGlmeS5jb20uXG5mZXN0aXZlLW5vYmVsLTg3NmMwNi5uZXRsaWZ5LmNvbS4gMjAgSU5cdEFcdDE1Ny4yMzAuMTIwLjYzIiwibGFuZ3VhZ2UiOiJiYXNoIn0="}
 
-;; ANSWER SECTION:
-festive-nobel-876c06.netlify.com. 20 IN	A	68.183.215.91
-```
+
+
+{"widget":"qards-code","config":"eyJjb2RlIjoiJCBkaWcgZmVzdGl2ZS1ub2JlbC04NzZjMDYubmV0bGlmeS5jb207OyBBTlNXRVIgU0VDVElPTjpcbmZlc3RpdmUtbm9iZWwtODc2YzA2Lm5ldGxpZnkuY29tLiAyMCBJTlx0QVx0NjguMTgzLjIxNS45MSIsImxhbmd1YWdlIjoiYmFzaCJ9"}
+
 
 So one domain points to an `A` record which hosts a service but other domains can point to the same resource using a CNAME towards the first domain.
 
 Back to out adblocking story. Let's say our extension is blocking a tracking domain such as `device-metrics-us-2.amazon.com`. Whoever uses that domain to track users will fail because it won't work with requests being filtered by our extension. What happends if I create a CNAME from `device-metrics-us-2.bogus.com` towards `device-metrics-us-2.amazon.com` and start using `device-metrics-us-2.bogus.com` in my app in order to track users? Those requests will slip through and it's business as usual with a simple CNAME. We can start injecting first-party javascript into our pages without any worries of them being filtered:
 
-```
-<script src="https://device-metrics-us-2.bogus.com/track.js"></script>
-```
+
+{"widget":"qards-code","config":"eyJsYW5ndWFnZSI6Imh0bWwiLCJjb2RlIjoiPHNjcmlwdCBzcmM9XCJodHRwczovL2RldmljZS1tZXRyaWNzLXVzLTIuYm9ndXMuY29tL3RyYWNrLmpzXCI+PC9zY3JpcHQ+In0="}
+
 
 In all honesty, I'm surprised it took them so many years to come up with this method. It's only now that this subject enters mainstream. CNAME's were here many years ago when adblocking started being a thing.
 
